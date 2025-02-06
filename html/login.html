@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입 및 로그인</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+    <div id="signup-container" class="hide">
+        <!-- 회원가입 폼 -->
+        <h2>회원가입</h2>
+        <form id="signup-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <div id="msg-username" class="hide">최소 3자 이상 작성해주세요.</div>
+            <input type="password" id="password" placeholder="Password" required>
+            <div id="msg-password" class="hide">최소 8자, 하나 이상의 숫자와 알파벳 포함하도록 작성해주세요.</div>
+            <input type="email" id="email" placeholder="Email" required>
+            <div id="msg-email" class="hide">기본적인 이메일 형식에 맞춰서 작성해주세요.</div>
+            <button type="submit">회원 가입</button>
+            <button type="button" id="change-login-btn">로그인</button>
+        </form>
+    </div>
+    <div id="login-container">
+        <!-- 로그인 폼 -->
+        <h2>로그인</h2>
+        <!-- <form id="login-form" action="./post.html"> -->
+        <form id="login-form">
+            <input type="text" id="login-username" placeholder="Username" required>
+            <div id="msg-login-username" class="hide">최소 3자 이상 작성해주세요.</div>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <div id="msg-login-password" class="hide">최소 8자, 하나 이상의 숫자와 알파벳 포함하도록 작성해주세요.</div>
+            <button type="submit">로그인</button>
+            <button type="button" id="change-signup-btn">회원가입</button>
+        </form>
+    </div>
+
+    <script src="../js/user.js"></script>
+</body>
+
+</html>
