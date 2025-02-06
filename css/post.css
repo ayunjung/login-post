@@ -110,7 +110,7 @@ a {
     color: var(--text-on-primary)
 }
 
-.data-view input {
+.data-update input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

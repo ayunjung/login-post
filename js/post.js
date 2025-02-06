@@ -95,6 +95,11 @@ const drawPostItem = ({id, title, content}) => {
     div.className = 'post-item'
     let dataDiv = document.createElement('div');
     dataDiv.className = 'data-view'
+    dataDiv.addEventListener('click', () => {
+        if (dataDiv.className === 'data-view') {
+            location.replace(`./detailPost.html?id=${id}`)
+        }
+    })
     let titleEl = document.createElement('h3');
     titleEl.textContent = `${title} - ${id}`
     let contentEl = document.createElement('p');
@@ -103,6 +108,7 @@ const drawPostItem = ({id, title, content}) => {
     updatedEl.textContent = '수정'
     updatedEl.addEventListener('click', () => {
         if( updatedEl.textContent === '수정') {
+            dataDiv.className = 'data-update'
             dataDiv.innerHTML = `<input type="text" id="update-post-title" placeholder="제목" value="${title}" required /><input type="text" id="update-post-content" placeholder="내용" value="${content}" required />`
             let cancleEl = document.createElement('button');
             cancleEl.textContent = '취소'
