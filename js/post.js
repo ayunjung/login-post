@@ -182,13 +182,7 @@ const getPostById = (id) => {
 
 const updatedPostById = (id, title, content) => {
     // 포스트 수정
-    console.log('updatePostId : ', id);
-    console.log('updatePostTit : ', title);
-    console.log('updatePostContent : ', content);
     const updatedPost = { title, content };
-    // api.updatePost(id, updatedPost).then(updated => {
-    //     console.log(updated);
-    // }); 
     api.updatePost(id, updatedPost).then(response => {
         console.log(response);
         if(response.ok){

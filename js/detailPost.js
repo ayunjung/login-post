@@ -9,7 +9,7 @@ class PostService {
     constructor(apiUrl) {
         this.apiUrl = apiUrl;
     }
-    
+
     // 단일 포스트를 조회합니다.
     fetchPost(id) {
         return fetch(`${this.apiUrl}/posts/${id}`).then(response => response.json());
@@ -42,18 +42,7 @@ const param = new URLSearchParams(query);		// "?id=1"
 const id = param.get('id');
 
 document.addEventListener("DOMContentLoaded", () => {
-    const postTitle = document.getElementById('post-title');
-    const postInfo = document.getElementById('post-info');
-    const postContent = document.getElementById('post-content');
-    api.fetchPost(id).then(post => {
-        postTitle.innerText = post.title;
-        if (post.createdAt !== post.updatedAt) {
-            postInfo.innerText = '등록일시 : ' + post.createdAt.split("T")[0] + '\u00a0\u00a0\u00a0수정일시 : ' + post.updatedAt.split("T")[0];
-        } else {
-            postInfo.innerText = '등록일시 : ' + post.createdAt.split("T")[0]
-        }
-        postContent.innerText = post.content;
-    });
+    getPost();
 });
 
 // 포스트 목록으로 이동
@@ -72,20 +61,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+const getPost = () => {
+    const postTitle = document.getElementById('post-title');
+    const postInfo = document.getElementById('post-info');
+    const postContent = document.getElementById('post-content');
+    api.fetchPost(id).then(post => {
+        postTitle.innerText = post.title;
+        if (post.createdAt !== post.updatedAt) {
+            postInfo.innerText = '등록일시 : ' + post.createdAt.split("T")[0] + '\u00a0\u00a0\u00a0수정일시 : ' + post.updatedAt.split("T")[0];
+        } else {
+            postInfo.innerText = '등록일시 : ' + post.createdAt.split("T")[0]
+        }
+        postContent.innerText = post.content;
+    });
+}
+
 const updatedPostById = (id, title, content) => {
     // 포스트 수정
     console.log('updatePostId : ', id);
     console.log('updatePostTit : ', title);
     console.log('updatePostContent : ', content);
     const updatedPost = { title, content };
-    // api.updatePost(id, updatedPost).then(updated => {
-    //     console.log(updated);
-    // }); 
     api.updatePost(id, updatedPost).then(response => {
         console.log(response);
         if(response.ok){
             console.log('updated post success : ', response);
-            getPosts()
+            getPost()
         }else{
             console.log('updated post fail : ', response.statusText);
         }
