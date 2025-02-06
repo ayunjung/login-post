@@ -105,3 +105,11 @@ a {
     background-color: var(--primary-color);
     color: var(--text-on-primary)
 }
+
+.data-view input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--divider-color);
+    box-sizing: border-box;
+}

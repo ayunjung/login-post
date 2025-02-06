@@ -41,7 +41,7 @@ class PostService {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(postData)
-        }).then(response => response.json());
+        }).then(response => response);
     }
 
     // 포스트를 삭제합니다.
@@ -70,23 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
             location.replace('./login.html');
             localStorage.clear();
         }
-    // userInfo.innerText = localStorage.getItem("username");
     });
 });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.getElementById('current-user-info').addEventListener('click', function(event) {
-//         event.preventDefault();
-//         const userInfo = document.getElementById('current-user-info').value;
-//         if(userInfo === '로그인'){
-//             location.replace('./login.html')
-//         } else {
-//             location.replace('./login.html');
-//             localStorage.clear();
-//             console.log(localStorage);
-//         }
-//     });
-// });
 
 const drawPost = () => {
     const postItems = document.querySelectorAll('.post-item')
@@ -108,18 +93,37 @@ const drawPost = () => {
 const drawPostItem = ({id, title, content}) => {
     let div = document.createElement('div');
     div.className = 'post-item'
+    let dataDiv = document.createElement('div');
+    dataDiv.className = 'data-view'
     let titleEl = document.createElement('h3');
     titleEl.textContent = `${title} - ${id}`
     let contentEl = document.createElement('p');
     contentEl.textContent = content
+    let updatedEl = document.createElement('button');
+    updatedEl.textContent = '수정'
+    updatedEl.style.marginRight = '5px'
+    updatedEl.addEventListener('click', () => {
+        if( updatedEl.textContent === '수정') {
+            dataDiv.innerHTML = `<input type="text" id="update-post-title" value="${title}" required /><input type="text" id="update-post-content" value="${content}" required />`
+            updatedEl.textContent = '수정완료'
+        } else {
+            const updateTitle = document.getElementById('update-post-title').value;
+            const updateContent = document.getElementById('update-post-content').value;
+            console.log(updateTitle);
+            console.log(updateContent);
+            updatedPostById(id, updateTitle, updateContent);
+        }
+    })
     let removeEl = document.createElement('button');
     removeEl.className = 'delete-btn'
     removeEl.textContent = '삭제'
     removeEl.addEventListener('click', () => {
         deletePostById(id)
     })
-    div.appendChild(titleEl)
-    div.appendChild(contentEl)
+    dataDiv.appendChild(titleEl)
+    dataDiv.appendChild(contentEl)
+    div.appendChild(dataDiv)
+    div.appendChild(updatedEl)
     div.appendChild(removeEl)
     return div;
 }
@@ -129,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         const title = document.getElementById('post-title').value;
         const content = document.getElementById('post-content').value;
+        console.log(document.getElementById('post-title').tagName);
         if(title === '' || content === ''){
             return alert('입력값이 유효하지 않습니다.');
         }
@@ -162,12 +167,24 @@ const getPostById = (id) => {
     });    
 }
 
-const updatedPostById = ({id, title, content}) => {
+const updatedPostById = (id, title, content) => {
     // 포스트 수정
+    console.log('updatePostId : ', id);
+    console.log('updatePostTit : ', title);
+    console.log('updatePostContent : ', content);
     const updatedPost = { title, content };
-    api.updatePost(1, updatedPost).then(updated => {
-        console.log(updated);
-    }); 
+    // api.updatePost(id, updatedPost).then(updated => {
+    //     console.log(updated);
+    // }); 
+    api.updatePost(id, updatedPost).then(response => {
+        console.log(response);
+        if(response.ok){
+            console.log('updated post success : ', response);
+            getPosts()
+        }else{
+            console.log('updated post fail : ', response.statusText);
+        }
+    })
 }
 
 const deletePostById = (id) => {
