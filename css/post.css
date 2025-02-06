@@ -94,4 +94,8 @@ a {
 #current-user-info {
     float: right;
     margin: 5px;
+    border: var(--primary-color) solid 1px;
+    border-radius: 5px;
+    padding: 3px;
+    color: var(--primary-color);
 }
