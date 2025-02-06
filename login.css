@@ -1,0 +1,89 @@
+/* 기본 머터리얼 디자인 색상 */
+:root {
+    --primary-color: #673ab7; /* Deep Purple 500 */
+    --primary-light: #9575cd; /* Deep Purple 300 */
+    --primary-dark: #59359B;
+    --primary-darkGray: #f0f0f0;
+    --text-on-primary: #ffffff;
+    --input-background: #ffffff;
+    --input-border: #e0e0e0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide {
+    display: none;
+}
+
+.errorMsg {
+    display: block;
+    width: 100%;
+    padding-left: 3px;
+    color: red;
+    font-size: 10px;
+}
+
+h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+form {
+    background-color: var(--input-background);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* x축 y축 blur(흐림) spread(크기) 색깔 */
+    width: 400px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid var(--input-border);
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+#change-login-btn {
+    background-color: var(--text-on-primary);
+    color: var(--primary-color);
+}
+#change-login-btn:hover {
+    background-color: var(--primary-darkGray);
+}
+
+#change-signup-btn {
+    background-color:  var(--text-on-primary);
+    color: var(--primary-color);
+}
+#change-signup-btn:hover {
+    background-color: var(--primary-darkGray);
+}
