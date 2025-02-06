@@ -79,6 +79,10 @@ a {
     color: #333;
 }
 
+.post-item button {
+    margin-right: 5px;
+}
+
 /* #myPage {
     margin: 5px;
     float: right;

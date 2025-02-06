@@ -101,16 +101,23 @@ const drawPostItem = ({id, title, content}) => {
     contentEl.textContent = content
     let updatedEl = document.createElement('button');
     updatedEl.textContent = '수정'
-    updatedEl.style.marginRight = '5px'
     updatedEl.addEventListener('click', () => {
         if( updatedEl.textContent === '수정') {
-            dataDiv.innerHTML = `<input type="text" id="update-post-title" value="${title}" required /><input type="text" id="update-post-content" value="${content}" required />`
+            dataDiv.innerHTML = `<input type="text" id="update-post-title" placeholder="제목" value="${title}" required /><input type="text" id="update-post-content" placeholder="내용" value="${content}" required />`
+            let cancleEl = document.createElement('button');
+            cancleEl.textContent = '취소'
+            cancleEl.className = 'cancle-btn'
+            div.appendChild(cancleEl);
             updatedEl.textContent = '수정완료'
+            cancleEl.addEventListener('click', () => {
+                getPosts();
+            })
         } else {
             const updateTitle = document.getElementById('update-post-title').value;
             const updateContent = document.getElementById('update-post-content').value;
-            console.log(updateTitle);
-            console.log(updateContent);
+            if(updateTitle === '' || updateTitle === ''){
+                return alert('입력값이 유효하지 않습니다.');
+            }
             updatedPostById(id, updateTitle, updateContent);
         }
     })
